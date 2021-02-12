@@ -28,7 +28,7 @@ What you will need in this lab:
 
 •	Jenkins
 
-PART 1: PERMISSIONS
+**PART 1: PERMISSIONS***
 
 STEP 1: Create a new user with permissions to fully access EC2, AutoScaling. CodeDeploy, and S3.
 
