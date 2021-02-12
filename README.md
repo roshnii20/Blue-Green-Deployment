@@ -151,6 +151,7 @@ STEP 6: Now go back to AWS Console and check for Deployment
 
 
 Successful output:
+
 ![Bg-5](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-5.png)
 
 
