@@ -28,7 +28,7 @@ What you will need in this lab:
 
 •	Jenkins
 
-**PART 1: PERMISSIONS***
+**PART 1: PERMISSIONS**
 
 STEP 1: Create a new user with permissions to fully access EC2, AutoScaling. CodeDeploy, and S3.
 
@@ -61,7 +61,7 @@ STEP 5: Create another role for CodeDeploy
 
 ![Bg-2](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-2.png)
 
-PART 2: EC2 INSTANCES
+**PART 2: EC2 INSTANCES**
 
 STEP 1: Create a new EC2 instance and for IAM role select the EC2 role we created earlier
 
@@ -105,7 +105,7 @@ Here we create an AS group using the template that we created in the previous st
 
 Based on the size that we of an Auto Scaling group is determined by the number of instances set in the desired capacity field, these can be set manually or by using automatic scaling. An Auto Scaling starts by launching desired number of instances, it maintains this number of instances by performing periodic health checks, if an instance becomes unhealthy, it replaces that unhealthy instance with another instance.
 
-PART 3: AWS CodeDeploy
+**PART 3: AWS CodeDeploy**
 
 STEP 1: We will create a new application on AWS CodeDeploy  
 
@@ -114,7 +114,7 @@ Choose EC2/On premises as compute platform, CodeDeploy Service role that we crea
 In the Deployment type, select Blue-Green Deployment, choose the ALB we had created in Part 1, Deployment Configuration as CodeDeployDefault.OneAtATime and create the Deployment Group
 
 
-PART 4: GITHUB
+**PART 4: GITHUB**
 
 STEP 1: Create a new repository on GitHub, create a new folder called as scripts and write 3 files in the way I have added in this repository
 
@@ -122,7 +122,7 @@ STEP 1: Create a new repository on GitHub, create a new folder called as scripts
 STEP 2: Create an appspec.yml file and index.html file in your repo as following (Not inside the scripts folder)
 
 
-PART 5: JENKINS
+**PART 5: JENKINS**
 
 In this exercise, we are going to use Jenkins to create our source build and create deployment
 
