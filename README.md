@@ -85,4 +85,85 @@ STEP 3: Create a new security group with following rules:
 
 We are alowing port 8080 because Jenkins uses that port to communicate.
 
-STEP 4:Create a new Application Load Balancer
+STEP 4: Create a new Application Load Balancer
+
+We are using Application Load Balancer(ALB) so that we can configure multiple listener rules by choosing our instances as Target groups. Because of ALB, we do not need to maintain separate instances for both Blue and Green environment.
+
+
+Start creating ALB and choose the security group we created earlier, register our instances to Targets, and create it.
+
+
+STEP 5: Create a template from our EC2 instance *(Choose VPC for Networking Platform and select the Security Group we have created)
+
+
+Now that our EC2 instances has the required dependencies in it, ALB attached and we want the same configuration for all our instances so are creating a template from our instance so that everything our instance has, will be present in the template and we will use this template to create an Auto-Scaling Group in next step. 
+
+
+STEP 6: Creating an Auto-Scaling group
+
+Here we create an AS group using the template that we created in the previous step. Enable Load Balancing and select out Target Group
+
+Based on the size that we of an Auto Scaling group is determined by the number of instances set in the desired capacity field, these can be set manually or by using automatic scaling. An Auto Scaling starts by launching desired number of instances, it maintains this number of instances by performing periodic health checks, if an instance becomes unhealthy, it replaces that unhealthy instance with another instance.
+
+PART 3: AWS CodeDeploy
+
+STEP 1: We will create a new application on AWS CodeDeploy  
+
+Choose EC2/On premises as compute platform, CodeDeploy Service role that we created earlier.
+
+In the Deployment type, select Blue-Green Deployment, choose the ALB we had created in Part 1, Deployment Configuration as CodeDeployDefault.OneAtATime and create the Deployment Group
+
+
+PART 4: GITHUB
+
+STEP 1: Create a new repository on GitHub, create a new folder called as scripts and write 3 files in the way I have added in this repository
+
+
+STEP 2: Create an appspec.yml file and index.html file in your repo as following (Not inside the scripts folder)
+
+
+PART 5: JENKINS
+
+In this exercise, we are going to use Jenkins to create our source build and create deployment
+
+STEP 1: Install Jenkins on your Virtual Machine (Follow official Jenkins installation guide for steps)
+
+
+STEP 2: We simply need to use the IP of our Jenkins server, which in this case is 192.168.1.28 and add a port 8080 after the IP address to open the Jenkins GUI (192.168.1.28:8080)
+
+
+STEP 3: Creating a new job on Jenkins (Use freestyle project)
+
+
+STEP 4: For Source Code Management, choose Git and add your repository link
+
+
+STEP 5: : Select a Post-Build job as Deploy application to CodeDeploy and enter all AWS CodeDeploy details as well as S3 bucket and IAM Credentials 
+
+Successful output:
+
+![Bg-5](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-6.png)
+
+
+STEP 6: Now go back to AWS Console and check for Deployment
+
+![Bg-4](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-4.png)
+
+
+Successful output:
+![Bg-5](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-5.png)
+
+
+
+STEP 7: Now go to your Load Balancer and check whether the traffic has shifted
+
+
+SUccessful output:
+
+![Bg-7](https://github.com/roshnii20/Blue-Green-Deployment/blob/main/Pictures/BG-7.PNG)
+
+
+Now you can make any changes to your index.html file and use Jenkins to trigger it.
+
+
+***End***
